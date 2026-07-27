@@ -3,6 +3,14 @@
 
 ***
 
+> [!IMPORTANT]
+> **Chrome Manifest V3 development build:** this fork's `mv3-improvement`
+> branch contains an unpacked, experimental AdNauseam Lite build for Chrome
+> 139 and later. It is not a stable AdNauseam release and does not yet have
+> complete feature parity with the Manifest V2 extension. See the
+> [Chromium MV3 build, installation, and status guide](platform/mv3/README.md)
+> before installing it.
+
 <div align="center">
   <a href="https://adnauseam.io">
     <img src="https://rednoise.org/images/adnauseam.png" width="150px"/>

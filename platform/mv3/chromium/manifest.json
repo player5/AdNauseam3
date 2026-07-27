@@ -8,6 +8,7 @@
     "default_popup": "popup.html"
   },
   "author": "Daniel C. Howe",
+  "key": "ilkggpgmkemaniponkfgnkonpajankkm",
   "background": {
       "service_worker": "/js/background.js",
       "type": "module"

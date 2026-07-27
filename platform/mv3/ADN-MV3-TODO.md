@@ -30,35 +30,39 @@ across reloads with no network re-fetch.
 
 ---
 
-## P1 — Vault UI (hard blocker)
+## P1 — Vault UI (partial)
 
-**Problem:** `vault.html` loads `js/adn/vault.js` which **does not exist**.
-MV2 vault is `src/js/adn/vault.js` (~2441 lines).
+**Current state:** the build copies the MV2 `vault.js` and its dependencies,
+patches module imports, and provides MV3 messaging/broadcast shims. The vault
+loads, but the full workflow still needs end-to-end verification against the
+MV3 storage and service-worker lifecycle.
 
 Tasks:
-- [ ] Create `platform/mv3/extension/js/adn/vault.js` (ES module).
-- [ ] Wire to existing background API: `adsForVault`, `getAdNauseamStats`,
+- [x] Include `src/js/adn/vault.js` in the generated MV3 build.
+- [x] Wire the existing background API: `adsForVault`, `getAdNauseamStats`,
       `deleteAd`, `deleteAdSet`, `purgeDeadAds`, `getCostPerClick`,
       `getHideDeadAds`/`setHideDeadAds`, `clearAds`, `exportAds`/`importAds`.
-- [ ] Port: ad grid/bubble layout, zoom, hover detail, cost-per-click display,
+- [ ] Verify: ad grid/bubble layout, zoom, hover detail, cost-per-click display,
       filter-by-page, dead-ad hiding/purge, export.
-- [ ] Listen for broadcasts (`adDetected`, `adAttempt`, `adVisited`) for live updates.
+- [x] Provide broadcast handling for live updates (`adDetected`, `adAttempt`,
+      `adVisited`).
 
 **Acceptance:** opening the vault renders all collected ads with working
 zoom/delete/export and live updates.
 
 ---
 
-## P2 — Settings / options UI
+## P2 — Settings / options UI (partial)
 
-**Problem:** settings only exist in background handlers; no UI to change them.
-MV2 is `src/js/adn/options.js` (~423 lines).
+**Current state:** the dashboard includes an AdNauseam settings surface wired
+to the MV3 service worker. The available controls are narrower than MV2 and
+still need runtime coverage.
 
 Tasks:
-- [ ] Add an AdNauseam pane to `dashboard.html` (or a dedicated options page).
+- [x] Add an AdNauseam pane to `dashboard.html`.
 - [ ] Expose: `clickingAds`, `clickProbability`, `costPerClick`, `blurCollectedAds`,
       `hideDeadAds`, `clickOnlyWhenIdleFor`, `disableWarnings`.
-- [ ] Persist via `getAdnSettings`/`setAdnSettings` (already in `background.js`).
+- [x] Persist implemented settings via `getAdnSettings`/`setAdnSettings`.
 
 **Acceptance:** toggling settings persists and changes runtime behavior
 (esp. `clickingAds` start/stop, `clickProbability`).
