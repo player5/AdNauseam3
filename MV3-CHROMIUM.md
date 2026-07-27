@@ -49,8 +49,10 @@ Known gaps include:
 - notifications and EFF Do Not Track integration are incomplete; and
 - the settings and vault workflows still need full end-to-end coverage.
 
-See [ADN-MV3-TODO.md](ADN-MV3-TODO.md) for the implementation backlog. Do not
-represent this branch as a production-ready AdNauseam release.
+See the
+[MV3 implementation backlog](https://github.com/BradGroux/AdNauseam/blob/mv3-improvement/platform/mv3/ADN-MV3-TODO.md)
+for the remaining
+work. Do not represent this branch as a production-ready AdNauseam release.
 
 ## Prerequisites
 
@@ -161,7 +163,7 @@ Then perform a manual smoke test:
 6. Leave Chrome idle long enough to verify a queued visit attempt.
 
 Record any failed step against the
-[MV3 implementation backlog](ADN-MV3-TODO.md).
+[MV3 implementation backlog](https://github.com/BradGroux/AdNauseam/blob/mv3-improvement/platform/mv3/ADN-MV3-TODO.md).
 
 ## Other MV3 targets
 

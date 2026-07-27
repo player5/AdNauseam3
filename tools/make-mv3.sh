@@ -118,7 +118,7 @@ cp platform/mv3/"$PLATFORM"/css-user.js "$ADNL_DIR"/js/scripting/ 2>/dev/null ||
 cp platform/mv3/extension/img/* "$ADNL_DIR"/img/
 cp platform/mv3/"$PLATFORM"/img/* "$ADNL_DIR"/img/ 2>/dev/null || :
 cp -R platform/mv3/extension/_locales "$ADNL_DIR"/
-cp platform/mv3/README.md "$ADNL_DIR/"
+cp MV3-CHROMIUM.md "$ADNL_DIR/README.md"
 
 # Merge MV2 locale messages (messages.json + adnauseam.json) into MV3 locales
 # Priority: MV3 messages.json > MV2 adnauseam.json > MV2 messages.json

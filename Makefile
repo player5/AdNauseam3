@@ -12,6 +12,7 @@ sources := ./dist/version $(shell find ./assets -type f) $(shell find ./src -typ
 platform := $(wildcard platform/*/*)
 assets := dist/build/uAssets
 mv3-sources := \
+	MV3-CHROMIUM.md \
 	$(shell find ./src -type f) \
 	$(wildcard platform/mv3/*) \
 	$(shell find ./platform/mv3/extension -name codemirror-ubol -prune -o -type f) \
