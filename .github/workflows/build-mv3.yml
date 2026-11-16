@@ -1,0 +1,64 @@
+name: Build and verify unpacked AdNauseam MV3
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Check out source and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Confirm build tools
+        run: |
+          node --version
+          make --version | head -n 1
+          jq --version
+          git submodule status
+
+      - name: Build unpacked Chromium extension
+        run: make mv3-chromium
+
+      - name: Validate manifest and generated code
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=dist/build/ADNLite.chromium
+          test -f "$ROOT/manifest.json"
+          jq -e '.manifest_version == 3 and .background.service_worker == "/js/background.js" and .key == "ilkggpgmkemaniponkfgnkonpajankkm"' "$ROOT/manifest.json"
+          find "$ROOT" -type f -name '*.json' -print0 | xargs -0 -r -n 1 jq -e . >/dev/null
+          find "$ROOT" -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -r -n 1 node --check >/dev/null
+          test -f "$ROOT/js/background.js"
+          echo "Static build checks passed; Chrome runtime not yet tested."
+
+      - name: Package unpacked extension
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist/packages
+          cd dist/build
+          zip -q -r ../packages/AdNauseam3-MV3-unpacked.zip ADNLite.chromium
+          unzip -t ../packages/AdNauseam3-MV3-unpacked.zip | tail -n 1
+
+      - name: Upload installable ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: AdNauseam3-MV3-unpacked
+          path: dist/packages/AdNauseam3-MV3-unpacked.zip
+          if-no-files-found: error
+          retention-days: 14
