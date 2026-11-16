@@ -31,6 +31,10 @@ jobs:
           jq --version
           git submodule status
 
+      - name: Install CodeMirror build dependencies
+        working-directory: platform/mv3/extension/lib/codemirror/codemirror-ubol
+        run: npm install --include=dev --no-audit --no-fund
+
       - name: Build unpacked Chromium extension
         run: make mv3-chromium
 
