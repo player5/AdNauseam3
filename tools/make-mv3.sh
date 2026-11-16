@@ -196,8 +196,8 @@ cp "$ADN_DIR"/src/lib/yamd5.js "$ADNL_DIR"/lib/
 # Patch imports in copied vault files for MV3 compatibility:
 #   - vault.js and notifications.js: adn-utils.js → vault-adn-utils.js
 #     (so the full src version is used instead of the MV3-slim version)
-sed -i '' "s|from './adn-utils.js'|from './vault-adn-utils.js'|" "$ADNL_DIR"/js/adn/vault.js
-sed -i '' "s|from \"./adn-utils.js\"|from \"./vault-adn-utils.js\"|" "$ADNL_DIR"/js/adn/notifications.js
+sed -i "s|from './adn-utils.js'|from './vault-adn-utils.js'|" "$ADNL_DIR"/js/adn/vault.js
+sed -i "s|from \"./adn-utils.js\"|from \"./vault-adn-utils.js\"|" "$ADNL_DIR"/js/adn/notifications.js
 
 echo "*** AdnauseamLite.mv3: Generating rulesets"
 UBOL_BUILD_DIR=$(mktemp -d)
