@@ -1,0 +1,24 @@
+/*
+ * MV3 dashboard contrast compatibility.
+ *
+ * AdNauseam's legacy src/css/common.css provides global body styles
+ * intended for the original dashboard, including a dark texture and
+ * --adn-text. The MV3 dashboard uses uBOL's --surface-* / --ink-* theme
+ * tokens instead. Keep legacy CSS for other components and restore the
+ * MV3 theme only on the dashboard.
+ */
+body[data-pane] {
+    background: var(--surface-0);
+    color: var(--ink-1);
+    line-height: 1.4;
+}
+body[data-pane] > section {
+    color: var(--ink-1);
+}
+body[data-pane] label,
+body[data-pane] legend,
+body[data-pane] h2,
+body[data-pane] h3,
+body[data-pane] p {
+    color: inherit;
+}
